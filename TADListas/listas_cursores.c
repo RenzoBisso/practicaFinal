@@ -264,7 +264,39 @@ TipoElemento siguiente(Iterador iterador) {
 // TAD se llamará: int EliminarPosFisica(Lista L, int PosFisica). Debería ser lo
 // más rápida posible.
 
-bool eliminar_pos_fisica(Lista l,int posFisica){
-    
-
+bool eliminar_pos_fisica(Lista l, int posFisica) {
+  if (posFisica > TAMANIO_MAXIMO) {
+    return false;
+  }
+  if (l->cantidad == 0) {
+    return false;
+  }
+  if (l->inicio == posFisica) {
+    int aux = l->inicio;
+    l->inicio = l->cursor[posFisica].siguiente;
+    l->cursor[posFisica].siguiente = l->libre;
+    l->libre = posFisica;
+    return true;
+  }
+  int actual = l->inicio;
+  while (actual != NULO && l->cursor[actual].siguiente != NULO) {
+    if (l->cursor[actual].siguiente == posFisica) {
+      int posAuxSiguiente = l->cursor[posFisica].siguiente;
+      l->cursor[actual].siguiente = posAuxSiguiente;
+      l->cursor[posFisica].siguiente = l->libre;
+      l->libre = posFisica;
+      l->cantidad--;
+      return true;
+    }
+    actual = l->cursor[actual].siguiente;
+  }
+  return false;
 }
+
+/*
+Agregar al TAD de listas con cursores una función que permita determinar si se
+trata de una lista ordenada ascendente. La función retornará “verdadero” si se
+cumple esa condición, caso contrario retornará falso. La función se llamará bool
+ListaEstaOrdenada(Lista L).
+*/
+
