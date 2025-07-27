@@ -40,4 +40,5 @@ bool hay_siguiente(Iterador iterador);
 
 TipoElemento siguiente(Iterador iterador);
 bool eliminar_pos_fisica();
+bool ListaOrdenada(Lista l);
 #endif  // LISTAS_H

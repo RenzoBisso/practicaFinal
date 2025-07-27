@@ -300,3 +300,20 @@ cumple esa condición, caso contrario retornará falso. La función se llamará 
 ListaEstaOrdenada(Lista L).
 */
 
+bool ListaOrdenada(Lista l) {
+  if (l->inicio == NULO) {
+    return false;
+  }
+  int actual = l->inicio;
+  int anterior = l->cursor[actual].datos;
+  while (actual != NULO && l->cursor[actual].siguiente != NULO) {
+    int siguiente = l->cursor[actual].siguiente;
+    if (l->cursor[actual].datos->clave >= l->cursor[siguiente].datos->clave) {
+      anterior = l->cursor[actual].siguiente;
+    } else {
+      return false;
+    }
+    actual = siguiente;
+  }
+  return true;
+}
